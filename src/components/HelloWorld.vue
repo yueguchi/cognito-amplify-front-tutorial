@@ -25,6 +25,8 @@
         class="btn btn-primary"
         @click="signOut">ログアウト</button>
       <img :src="url">
+      <br>
+      <router-link :to="{ name: 'ApiGatewayTest'}">APIGateway連携テスト</router-link>
     </div>
   </div>
 </template>
