@@ -4,14 +4,20 @@
       <p>ログイン</p>
       <p>{{ status }}</p>
       <p>{{ message_text }} </p>
-      <label>ユーザー名</label>
-      <input
-        v-model="userInfo.username"
-        type="text">
-      <label>パスワード</label>
-      <input
-        v-model="userInfo.password"
-        type="password">
+      <ul class="login-form">
+        <li>
+          <label>ユーザー名</label>
+          <input
+            v-model="userInfo.username"
+            type="text">
+        </li>
+        <li>
+          <label>パスワード</label>
+          <input
+            v-model="userInfo.password"
+            type="password">
+        </li>
+      </ul>
       <button
         class="btn btn-primary"
         @click="signIn">ログイン</button>
@@ -19,20 +25,6 @@
         class="btn btn-primary"
         @click="signOut">ログアウト</button>
       <img :src="url">
-    </div>
-    <div class="login-form">
-      <p>サインアップ</p>
-      <label>ユーザー名</label>
-      <input
-        v-model="userInfo.username"
-        type="text">
-      <label>パスワード</label>
-      <input
-        v-model="userInfo.password"
-        type="password">
-      <button
-        class="btn btn-primary"
-        @click="signUp">サインアップ</button>
     </div>
   </div>
 </template>
@@ -101,6 +93,6 @@ export default {
 </script>
 <style scoped>
 .login-form {
-  margin: 20;
+  list-style: none;
 }
 </style>
