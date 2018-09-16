@@ -17,6 +17,7 @@
     "@vue/eslint-config-prettier": "^3.0.3",
     "amplify": "0.0.11",
     "aws-amplify": "^1.0.11",
+    "axios": "^0.18.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
