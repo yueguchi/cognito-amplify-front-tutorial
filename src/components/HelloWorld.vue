@@ -24,7 +24,6 @@
       <button
         class="btn btn-primary"
         @click="signOut">ログアウト</button>
-      <img :src="url">
       <br>
       <router-link :to="{ name: 'ApiGatewayTest'}">APIGateway連携テスト</router-link>
     </div>
@@ -48,27 +47,24 @@ export default {
     }
   },
   created() {
-    Auth.currentSession()
-      .then(data => {
-        console.log(data)
-        this.status = 'ログインしています'
-      })
-      .catch(err => {
-        console.log(err)
-        this.status = 'ログインしていません'
-      })
+    this.checkLogin()
   },
   mounted() {
     console.log(this.userInfo)
   },
   methods: {
-    signUp() {
-      Auth.signUp(this.userInfo.username, this.userInfo.password)
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
+    checkLogin() {
+      Auth.currentSession()
+        .then(data => {
+          console.log(data)
+          this.status = 'ログインしています'
+        })
+        .catch(err => {
+          console.log(err)
+          this.status = 'ログインしていません'
+        })
     },
     signIn() {
-      console.log(this.userInfo)
       Auth.signIn(this.userInfo.username, this.userInfo.password)
         .then(data => {
           this.message_text = 'ログインしました'
@@ -78,6 +74,7 @@ export default {
           console.log(err)
           this.message_text = 'ログインできませんでした'
         })
+      this.checkLogin()
     },
     signOut() {
       Auth.signOut()
@@ -89,6 +86,7 @@ export default {
           console.log(err)
           this.message_text = 'ログアウトできませんでした'
         })
+      this.checkLogin()
     }
   }
 }
