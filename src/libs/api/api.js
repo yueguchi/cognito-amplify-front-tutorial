@@ -1,20 +1,13 @@
-import axios from 'axios'
+import { Auth, API } from 'aws-amplify'
 
-// API系は自分のAPI使ってね。このAPIはアクセス制限かかっているので他の人は使えません
-const API_BASE_URL = 'https://milaadw0od.execute-api.ap-northeast-1.amazonaws.com/'
-const API_ENV = 'stg'
-
-const apiClient = axios.create({
-  baseURL: API_BASE_URL
-})
-
-apiClient.interceptors.request.use(async config => {
-  config.headers['Authorization'] = localStorage.getItem(
-    'CognitoIdentityServiceProvider.4enc6qmrc2isf2phv5hoag17t.eguchi.idToken'
-  )
-  return config
-})
+const API_NAME = 'cognito-tutorial-api'
 
 export async function getTest() {
-  return apiClient.get(`${API_BASE_URL}${API_ENV}/test`)
+  const user = await Auth.currentAuthenticatedUser()
+  const token = user.signInUserSession.idToken.jwtToken
+  return API.get(API_NAME, '/stg/test', {
+    headers: {
+      Authorization: token
+    }
+  })
 }

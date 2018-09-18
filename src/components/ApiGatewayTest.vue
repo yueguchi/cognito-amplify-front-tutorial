@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     async test() {
-      const { data: { body } } = await api.getTest()
+      const { body } = await api.getTest()
       this.message = body
     }
   }
